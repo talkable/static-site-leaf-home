@@ -897,7 +897,7 @@
 
               function c(e, t) {
                 const r = n.ee.get(t);
-                s[t] ?? = {}, e && "object" == typeof e && (a.has(t) || (r.emit("rumresp", [e]), s[t] = e, a.add(t), function(e = {}) {
+                s[t]??={}, e && "object" == typeof e && (a.has(t) || (r.emit("rumresp", [e]), s[t] = e, a.add(t), function(e = {}) {
                   try {
                     i.gm.dispatchEvent(new CustomEvent(o, {
                       detail: e
@@ -1043,7 +1043,7 @@
 
               function c(e, t) {
                 let r = a();
-                r.initializedAgents ?? = {}, t.initializedAt = {
+                r.initializedAgents??={}, t.initializedAt = {
                   ms: (0, i.t)(),
                   date: new Date
                 }, r.initializedAgents[e] = t
@@ -1617,10 +1617,10 @@
                 } = t;
                 C.loaderType = p;
                 const L = (0, h.pV)();
-                j || (R = L.init, j = L.info, P = L.loader_config), (0, S.xN)(e.agentIdentifier, R || {}), (0, O.a)(e.agentIdentifier, P || {}), j.jsAttributes ?? = {}, d.bv && (j.jsAttributes.isWorker = !0), (0, i.x1)(e.agentIdentifier, j);
+                j || (R = L.init, j = L.info, P = L.loader_config), (0, S.xN)(e.agentIdentifier, R || {}), (0, O.a)(e.agentIdentifier, P || {}), j.jsAttributes??={}, d.bv && (j.jsAttributes.isWorker = !0), (0, i.x1)(e.agentIdentifier, j);
                 const D = (0, S.D0)(e.agentIdentifier),
                   H = [j.beacon, j.errorBeacon];
-                _ || (D.proxy.assets && (I(D.proxy.assets), H.push(D.proxy.assets)), D.proxy.beacon && H.push(D.proxy.beacon), A(), (0, h.US)("activatedFeatures", N.B), e.runSoftNavOverSpa && = !0 === D.soft_navigations.enabled && D.feature_flags.includes("soft_nav")), C.denyList = [...D.ajax.deny_list || [], ...D.ajax.block_internal ? H : []], C.ptid = e.agentIdentifier, (0, o.V)(e.agentIdentifier, C), e.ee = s.ee.get(e.agentIdentifier), void 0 === e.api && (e.api = function(e, t, h = !1) {
+                _ || (D.proxy.assets && (I(D.proxy.assets), H.push(D.proxy.assets)), D.proxy.beacon && H.push(D.proxy.beacon), A(), (0, h.US)("activatedFeatures", N.B), e.runSoftNavOverSpa&&=!0 === D.soft_navigations.enabled && D.feature_flags.includes("soft_nav")), C.denyList = [...D.ajax.deny_list || [], ...D.ajax.block_internal ? H : []], C.ptid = e.agentIdentifier, (0, o.V)(e.agentIdentifier, C), e.ee = s.ee.get(e.agentIdentifier), void 0 === e.api && (e.api = function(e, t, h = !1) {
                   t || (0, c.Ak)(e, "api");
                   const p = {};
                   var x = s.ee.get(e),
@@ -2606,43 +2606,44 @@
           class Pe extends v {
             static featureName = t.TZ;
             #i;
-            constructor(e, r, n = !0) {
-              let i;
-              super(e, r, t.TZ, n), this.replayRunning = !1;
-              try {
-                i = JSON.parse(localStorage.getItem("".concat(je.H3, "_").concat(je.uh)))
-              } catch (e) {}(0, g.SR)(e) && this.ee.on(t.G4.RECORD, (() => this.#o())), this.#a(i) ? (this.#i = i?.sessionReplayMode, this.#s()) : this.importAggregator(), this.ee.on("err", (e => {
-                this.replayRunning && (this.errorNoticed = !0, (0, E.p)(t.G4.ERROR_DURING_REPLAY, [e], void 0, this.featureName, this.ee))
-              })), this.ee.on(t.G4.REPLAY_RUNNING, (e => {
-                this.replayRunning = e
-              }))
+            #o;
+            #s(e) {
+              return e && (e.sessionReplayMode === Oe.g.FULL || e.sessionReplayMode === Oe.g.ERROR) || (0, g.Aw)(this.agentIdentifier)
             }
-            #a(e) {
-              return e && (e.sessionReplayMode === je.g.FULL || e.sessionReplayMode === je.g.ERROR) || (0, g.Aw)(this.agentIdentifier)
-            }
-            #c = !1;
-            async #s(e) {
-              if (!this.#c) {
-                this.#c = !0;
+            #u = !1;
+            async #c(e) {
+              if (!this.#u) {
+                this.#u = !0;
                 try {
                   const {
                     Recorder: t
-                  } = await Promise.all([i.e(478), i.e(249)]).then(i.bind(i, 2496));
-                  this.recorder ?? = new t({
+                  } = await Promise.all([i.e(478), i.e(249)]).then(i.bind(i, 8589));
+                  this.recorder??= new t({
                     mode: this.#i,
                     agentIdentifier: this.agentIdentifier,
                     trigger: e,
                     ee: this.ee
                   }), this.recorder.startRecording(), this.abortHandler = this.recorder.stopRecording
                 } catch (e) {}
-                this.importAggregator({
+                this.importAggregator(this.#o, {
                   recorder: this.recorder,
                   errorNoticed: this.errorNoticed
                 })
               }
             }
-            #o() {
-              this.featAggregate ? this.featAggregate.mode !== je.g.FULL && this.featAggregate.initializeRecording(je.g.FULL, !0) : (this.#i = je.g.FULL, this.#s(t.Qb.API), this.recorder && this.recorder.parent.mode !== je.g.FULL && (this.recorder.parent.mode = je.g.FULL, this.recorder.stopRecording(), this.recorder.startRecording(), this.abortHandler = this.recorder.stopRecording))
+            #a() {
+              this.featAggregate ? this.featAggregate.mode !== Oe.g.FULL && this.featAggregate.initializeRecording(Oe.g.FULL, !0) : (this.#i = Oe.g.FULL, this.#c(t.Qb.API), this.recorder && this.recorder.parent.mode !== Oe.g.FULL && (this.recorder.parent.mode = Oe.g.FULL, this.recorder.stopRecording(), this.recorder.startRecording(), this.abortHandler = this.recorder.stopRecording))
+            }
+            constructor(e, r = !0) {
+              let n;
+              super(e, t.TZ, r), this.replayRunning = !1, this.#o = e;
+              try {
+                n = JSON.parse(localStorage.getItem("".concat(Oe.H3, "_").concat(Oe.uh)))
+              } catch (e) {}(0, g.SR)(e.agentIdentifier) && this.ee.on(t.G4.RECORD, (() => this.#a())), this.#s(n) ? (this.#i = n?.sessionReplayMode, this.#c()) : this.importAggregator(e), this.ee.on("err", (e => {
+                this.replayRunning && (this.errorNoticed = !0, (0, x.p)(t.G4.ERROR_DURING_REPLAY, [e], void 0, this.featureName, this.ee))
+              })), this.ee.on(t.G4.REPLAY_RUNNING, (e => {
+                this.replayRunning = e
+              }))
             }
           }
           var Ce = i(3962);
